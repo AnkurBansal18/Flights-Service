@@ -8,6 +8,6 @@ const airplaneRoutes = require("./airplane-routes");
 //   });
 //   res.sendStatus(200);
 // });
-router.use("/airplane", airplaneRoutes);
+router.use("/airplanes", airplaneRoutes);
 router.get("/info", infoController.info);
 module.exports = router;
