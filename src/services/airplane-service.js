@@ -46,7 +46,23 @@ async function getAirplane(id) {
         error.statusCode
       );
     }
-    throw new AppError("Airplane not found", StatusCodes.BAD_REQUEST);
+    throw new AppError("Can't fetch data", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
-module.exports = { createAirplane, getAirplanes, getAirplane };
+
+async function destroyAirplane(id) {
+  try {
+    const response = await airplaneRepository.destroy(id);
+    return response;
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The Airplane you requested for deletion is not present :(",
+        error.statusCode
+      );
+    }
+    throw new AppError("Can't fetch data", StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+module.exports = { createAirplane, getAirplanes, getAirplane, destroyAirplane };

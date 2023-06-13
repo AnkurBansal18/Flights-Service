@@ -23,6 +23,12 @@ class CrudRepository {
         id: data,
       },
     });
+    if (!response) {
+      throw new AppError(
+        "Not able to find the resource",
+        StatusCodes.NOT_FOUND
+      );
+    }
     return response;
     // } catch (error) {
     //   Logger.error("Something went wrong in the crud repository : destroy");
@@ -34,6 +40,7 @@ class CrudRepository {
     // try {
     const response = await this.model.findByPk(data);
     if (!response) {
+      //handling here as it can be common for other tables like city as well.
       throw new AppError(
         "Not able to find the resource",
         StatusCodes.NOT_FOUND
