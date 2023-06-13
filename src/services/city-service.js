@@ -8,7 +8,6 @@ async function createCity(data) {
     const city = await cityRepository.create(data);
     return city;
   } catch (error) {
-    console.log(error);
     if (
       error.name == "SequelizeValidationError" ||
       error.name == "SequelizeUniqueConstraintError"
@@ -20,12 +19,28 @@ async function createCity(data) {
       throw new AppError(explanation, StatusCodes.BAD_REQUEST);
     }
     throw new AppError(
-      "Cant create a new city object",
+      "Can't create a new city object",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }
 }
 
+async function destroyCity(id) {
+  try {
+    const response = await cityRepository.destroy(id);
+    return response;
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The City you requested for deletion is not present :(",
+        error.statusCode
+      );
+    }
+    throw new AppError("Can't fetch data", StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
 module.exports = {
   createCity,
+  destroyCity,
 };
