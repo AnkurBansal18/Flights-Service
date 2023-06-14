@@ -79,6 +79,7 @@ async function updateAirplane(id, data) {
     throw new AppError("Can't fetch data", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
+
 module.exports = {
   createAirplane,
   getAirplanes,
