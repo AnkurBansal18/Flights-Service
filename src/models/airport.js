@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       airport.belongsTo(models.City, {
         foreignKey: "city_id",
         onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+        // onUpdate: "CASCADE",
       });
     }
   }

@@ -17,7 +17,7 @@ module.exports = {
         table: "Cities",
         field: "id",
       },
-      onUpdate: "CASCADE",
+      // onUpdate: "CASCADE",
       onDelete: "CASCADE", // deletes rows in a child table when corresponding rows are deleted in the parent table
     });
   },
