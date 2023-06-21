@@ -1,5 +1,6 @@
 const CrudRepository = require("./crud-repository");
-const { flight } = require("../models");
+const { flight, Aeroplane, airport } = require("../models");
+const { Sequelize } = require("sequelize");
 
 class FlightRepository extends CrudRepository {
   constructor() {
@@ -11,6 +12,38 @@ class FlightRepository extends CrudRepository {
       where: filter,
       // order: sort,
       // order: [["price", "ASC"]],
+      include: [
+        {
+          model: Aeroplane,
+          required: true,
+          as: "airplane_details",
+        },
+        {
+          model: airport,
+          required: true, //inner join
+          as: "departure_airport",
+          //used if association is based on column other than primary key
+          on: {
+            col1: Sequelize.where(
+              Sequelize.col("flight.departure_airport_id"),
+              "=",
+              Sequelize.col("departure_airport.IATA_code")
+            ),
+          },
+        },
+        {
+          model: airport,
+          required: true,
+          as: "arrival_airport",
+          on: {
+            col1: Sequelize.where(
+              Sequelize.col("flight.arrival_airport_id"),
+              "=",
+              Sequelize.col("arrival_airport.IATA_code")
+            ),
+          },
+        },
+      ],
     });
     return response;
   }
