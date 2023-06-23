@@ -35,7 +35,7 @@ async function getAllFlights(query) {
     [departure_airport_id, arrival_airport_id] = query.trips.split("-");
     customFilter.departure_airport_id = departure_airport_id;
     customFilter.arrival_airport_id = arrival_airport_id;
-    //todo add a check that departure_airport_id != arrival_airport_id
+    //todo - add a check that departure_airport_id != arrival_airport_id
   }
 
   if (query.price) {
@@ -61,7 +61,6 @@ async function getAllFlights(query) {
   // if (query.sort) {
   //   const params = query.sort.split(",");
   //   const sortFilters = params.map((param) => param.split("_"));
-  //   // console.log(sortFilters);
   //   const sortFilter = sortFilters;
   // }
 

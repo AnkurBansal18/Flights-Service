@@ -27,7 +27,6 @@ async function getAirplanes() {
     const airplanes = await airplaneRepository.getAll();
     return airplanes;
   } catch (error) {
-    console.log(error);
     throw new AppError(
       "Can't fetch data of all the airplanes",
       StatusCodes.INTERNAL_SERVER_ERROR

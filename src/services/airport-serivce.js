@@ -29,7 +29,6 @@ async function getAirports() {
     const airports = await airportRepository.getAll();
     return airports;
   } catch (error) {
-    console.log(error);
     throw new AppError(
       "Can't fetch data of all the airports",
       StatusCodes.INTERNAL_SERVER_ERROR

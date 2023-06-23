@@ -39,7 +39,6 @@ class CrudRepository {
   async get(data) {
     // try {
     const response = await this.model.findByPk(data);
-    console.log(response);
     if (!response) {
       //handling here as it can be common for other tables like city as well.
       throw new AppError(
@@ -73,7 +72,6 @@ class CrudRepository {
         id: id,
       },
     });
-    // console.log(response, 111);
     if (response.length === 1 && response[0] === 0) {
       throw new AppError(
         "Not able to find the resource",
