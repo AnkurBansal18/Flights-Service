@@ -33,9 +33,17 @@ async function getAllFlights(query) {
   let tripDateEndTime = " 23:59:00"; // 2022-05-12 01:00:00 ex
   if (query.trips) {
     [departure_airport_id, arrival_airport_id] = query.trips.split("-");
-    customFilter.departure_airport_id = departure_airport_id;
-    customFilter.arrival_airport_id = arrival_airport_id;
+
     //todo - add a check that departure_airport_id != arrival_airport_id
+    if (departure_airport_id !== arrival_airport_id) {
+      customFilter.departure_airport_id = departure_airport_id;
+      customFilter.arrival_airport_id = arrival_airport_id;
+    } else {
+      throw new AppError(
+        "Can't fetch data of flights",
+        StatusCodes.BAD_REQUEST
+      );
+    }
   }
 
   if (query.price) {
