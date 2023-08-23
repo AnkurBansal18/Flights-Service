@@ -55,6 +55,17 @@ class FlightRepository extends CrudRepository {
     });
     return response;
   }
+  async updateRemainingSeats(flightId, seats, dec = true) {
+    const reqFlight = await flight.findByPk(flightId);
+
+    //type coercion(parseInt(dec))
+    if (parseInt(dec)) {
+      await reqFlight.decrement("total_seats", { by: seats });
+    } else {
+      await reqFlight.increment("total_seats", { by: seats });
+    }
+    return reqFlight;
+  }
 }
 
 module.exports = FlightRepository;
