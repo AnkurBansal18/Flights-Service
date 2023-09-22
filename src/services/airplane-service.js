@@ -1,4 +1,3 @@
-const { log } = require("winston");
 const { AirplaneRepository } = require("../repositories");
 const { StatusCodes } = require("http-status-codes");
 const AppError = require("../utils/errors/app-error");
